@@ -1,6 +1,11 @@
-<?xml version="1.0"?>
-<ruleset>
-    <rule ref="vendor/codeigniter4/codeigniter4-standard/CodeIgniter4/ruleset.xml"></rule>
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="CodeIgniter-IonAuth">
+    <description>CodeIgniter-IonAuth Coding Standards</description>
 
-    <file>Controllers</file>
+    <rule ref="vendor/codeigniter4/codeigniter4-standard/CodeIgniter4/" />
+
+    <!-- Exclude the Composer Vendor directory. -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>.git*</exclude-pattern>
+
 </ruleset>
