@@ -3,7 +3,7 @@ Installing Ion Auth.
 
 Before installing, please check that you are meeting the minimum server requirements.
 
-There are differents ways to install this package.
+There are different ways to install this package.
 
 
 > 1. With composer
@@ -18,11 +18,12 @@ $ composer require https://github.com/benedmunds/CodeIgniter-Ion-Auth:dev-4
 
 ```shell
 my-project$ git clone https://github.com/benedmunds/CodeIgniter-Ion-Auth.git
-my-project$ git checkout 4
+my-project$ cd CodeIgniter-Ion-Auth
+CodeIgniter-Ion-Auth$ git checkout 4
 ```
 Then in your Config/Autoload.php, add this :
 ```php
-'IonAuth' => ROOTPATH . 'Code-Igniter-Ion-Auth',
+'IonAuth' => ROOTPATH . 'CodeIgniter-Ion-Auth',
 ```
 
 ---
@@ -44,7 +45,16 @@ Then in your Config/Autoload.php, add this :
 ---
 
 ### Relational DB Setup
-Then just run the appropriate SQL file or if you prefere, use the migration file (in Database/Migrations/).
+Then use the migration file (in Database/Migrations/).
+```
+$ php spark migrate:latest -n IonAuth
+```
+Don't forget to set Config\Migrations:enabled to true.
+
+You can also use the seeds file to insert default datas:
+```
+$ php spark db:seed IonAuth\\Database\\Seeds\\IonAuthSeeder
+```
 
 ---
 
@@ -62,4 +72,13 @@ class Auth extends \IonAuth\Controllers\Auth
      */
     // protected $viewsFolder = 'auth';
 }
+```
+You can also add routes configs in 'Config\Routes.php':
+```php
+$routes->group('auth', ['namespace' => 'IonAuth\Controllers'], function ($routes) {
+	$routes->get('/', 'Auth::index');
+	$routes->add('login', 'Auth::login');
+	$routes->get('logout', 'Auth::logout');
+	$routes->get('forgot_password', 'Auth::forgot_password');
+});
 ```

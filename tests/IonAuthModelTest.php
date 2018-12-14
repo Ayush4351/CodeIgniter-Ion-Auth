@@ -1,4 +1,5 @@
-<?php namespace IonAuth\Tests;
+<?php
+namespace IonAuth\Tests;
 
 /**
  * IonAuthModel tests
@@ -86,6 +87,16 @@ class IonAuthModelTest extends \CodeIgniter\Test\CIDatabaseTestCase
 	}
 
 	/**
+	 * Test login
+	 *
+	 * @return void
+	 */
+	public function testLogin()
+	{
+		$this->assertFalse($this->model->login('admin@admin.com', 'bad_password'));
+	}
+
+	/**
 	 * Test getLastAttemptTime()
 	 *
 	 * @return void
@@ -127,6 +138,17 @@ class IonAuthModelTest extends \CodeIgniter\Test\CIDatabaseTestCase
 	}
 
 	/**
+	 * Test removeFromGroup, addToGroup()
+	 *
+	 * @return void
+	 */
+	public function testRemoveFromAndAddToGroup()
+	{
+		$this->assertTrue($this->model->removeFromGroup(1, 1));
+		$this->assertEquals(1, $this->model->addToGroup(1, 1));
+	}
+
+	/**
 	 * Test createGroup(), updateGroup(), DeleteGroup()
 	 *
 	 * @return void
@@ -134,7 +156,7 @@ class IonAuthModelTest extends \CodeIgniter\Test\CIDatabaseTestCase
 	public function testCreateUpdateDeleteGroup()
 	{
 		$idGroup = $this->model->createGroup(random_string());
-		$this->model->updateGroup($idGroup, random_string());
+		$this->assertTrue($this->model->updateGroup($idGroup, random_string(), ['description' => 'test']));
 		$this->assertTrue($this->model->deleteGroup($idGroup));
 	}
 
@@ -187,8 +209,6 @@ class IonAuthModelTest extends \CodeIgniter\Test\CIDatabaseTestCase
 	 */
 	public function testErrors()
 	{
-		$this->assertEmpty($this->model->errors());
-
 		$this->model->setError('Test error !');
 		$this->assertContains('Test error !', $this->model->errors());
 	}
