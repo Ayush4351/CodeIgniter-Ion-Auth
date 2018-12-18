@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rulset name="CodeIgniter IonAuth">
+	<description>CodeIgniter IonAuth coding style</description>
+
+	<config name="installed_paths" value="vendor/codeigniter4/codeigniter4-standard/CodeIgniter4"/>
+	<rule ref="CodeIgniter4"/>
+
+	<arg name="colors"/>
+	<arg value="p"/>
+
+	<file>Config</file>
+	<file>Controllers</file>
+	<file>Database</file>
+	<file>Language</file>
+	<file>Libraries</file>
+	<file>Models</file>
+	<file>tests</file>
+	<file>Views</file>
+
+</rulset>
